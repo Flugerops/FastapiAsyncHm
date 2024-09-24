@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "app"
+version = "0.1.0"
+description = ""
+authors = ["Bohdan Savin <bogdan07112009@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.115.0"
+Hypercorn = "^0.17.3"
+sqlalchemy = "^2.0.35"
+
+[tool.poetry.scripts]
+run_app = "app:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
