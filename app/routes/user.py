@@ -1,5 +1,6 @@
 from sqlalchemy import select
 from fastapi import HTTPException
+from aiohttp import ClientSession
 from .. import app
 from ..db import Session, User
 from ..schemas import UserData
@@ -12,7 +13,13 @@ async def get_users():
         users = [UserData.model_validate(user) for user in users]
         return users
 
-
+@app.get("/mock_users")
+async def mock_users():
+    async with ClientSession() as session:
+        async with session.get("https://jsonplaceholder.typicode.com/users") as resp:
+            return await resp.json()
+    
+    
 @app.post("/users", status_code=201)
 async def create_user(data: UserData):
     try:
